@@ -1,0 +1,53 @@
+
+header {
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0;
+
+    .logo {
+      h1 {
+        font-size: 30px;
+      }
+    }
+
+    .menu {
+
+      @include tablet {
+        display: none;
+      }
+      ul {
+        display: flex;
+        gap: 20px;
+      }
+    }
+
+    .menu-hamburger {
+      display: none;
+      @include tablet {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        span {
+          position: relative;
+          background-color: $color-black;
+          width: 50px;
+          height: 3px;
+        }
+      }
+
+    }
+  }
+}
+
+.menu-mobile {
+  background-color: white;
+  padding: 40px 0;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

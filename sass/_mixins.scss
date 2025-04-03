@@ -1,0 +1,32 @@
+
+// Breakpoints
+$breakpoint-mobile: 575px;
+$breakpoint-tablet: 850px;
+$breakpoint-desktop-small: 992px;
+$breakpoint-desktop-large: 1200px;
+
+// Mixin para breakpoints
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop-small {
+  @media (max-width: #{$breakpoint-desktop-small}) {
+    @content;
+  }
+}
+
+@mixin desktop-large {
+  @media (min-width: #{$breakpoint-desktop-large}) {
+    @content;
+  }
+}
+

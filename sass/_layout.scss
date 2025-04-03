@@ -1,0 +1,84 @@
+// Container principal
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+  // padding: 0 $space-medium;
+
+  @include desktop-small {
+    max-width: 960px;
+  }
+
+  @include tablet {
+    max-width: 720px;
+  }
+
+  @include mobile {
+    max-width: 540px;
+    padding: 0 20px;
+  }
+}
+
+.container-news {
+  max-width: 750px;
+  margin: 0 auto;
+  // padding: 0 $space-medium;
+
+  @include desktop-small {
+    max-width: 960px;
+  }
+
+  @include tablet {
+    max-width: 720px;
+  }
+
+  @include mobile {
+    max-width: 540px;
+    padding: 0 20px;
+  }
+}
+
+//Margens e Padding
+.mg-mx {
+  padding: 100px 0;
+  @include mobile {
+    padding: 50px 0;
+  }
+}
+.mg-md {
+  margin: 50px 0;
+}
+.mg-pd {
+  margin: 20px 0;
+}
+
+.pd-mx {
+  padding: 80px 0;
+  @include tablet {
+    padding: 50px 0;
+  }
+  @include mobile {
+    padding: 50px 0;
+  }
+}
+
+.pd-md {
+  padding: 50px 0;
+}
+.pd-pd {
+  padding: 20px 0;
+}
+
+// Layout de grid para páginas
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $space-medium;
+
+  @include tablet {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
