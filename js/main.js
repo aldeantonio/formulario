@@ -1,31 +1,47 @@
+
 document.getElementById('meu-formulario').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const form = e.target;
   const botao = document.getElementById('botao-enviar');
-  const mensagem = document.getElementById('mensagem-estado');
+  const estado = document.getElementById('mensagem-estado');
+  const form = e.target;
 
   botao.disabled = true;
-  mensagem.textContent = 'A enviar...';
+  estado.textContent = 'A enviar...';
 
-  const formData = new FormData(form);
+  // Obter todos os dados
+  const dados = {
+    nome: form.nome.value,
+    email: form.email.value,
+    telefone: form.telefone.value,
+    tipo_servico: form.tipo_servico.value,
+    tipo_projeto: Array.from(form.querySelectorAll('input[name="tipo_projeto"]:checked')).map(el => el.value),
+    orcamento: form.orcamento.value,
+    data_entrega: form.data_entrega.value,
+    horario_meeting: form.horario_meeting.value,
+    comentarios: form.comentarios.value
+  };
 
-  fetch('https://formspree.io/f/movekgan', {
+  // Enviar para o Formspree
+  fetch('https://formspree.io/f/meqwydpr', {
     method: 'POST',
-    body: formData,
     headers: {
+      'Content-Type': 'application/json',
       'Accept': 'application/json'
-    }
-  }).then(response => {
-    if (response.ok) {
-      mensagem.textContent = 'Dados enviados com sucesso!';
+    },
+    body: JSON.stringify(dados)
+  })
+  .then(res => {
+    if (res.ok) {
+      estado.textContent = 'Mensagem enviada com sucesso!';
       form.reset();
     } else {
-      mensagem.textContent = 'Ocorreu um erro. Tente novamente.';
+      estado.textContent = 'Erro ao enviar. Tente novamente.';
     }
     botao.disabled = false;
-  }).catch(error => {
-    mensagem.textContent = 'Erro ao enviar. Verifique a ligação.';
+  })
+  .catch(() => {
+    estado.textContent = 'Erro de rede. Verifique a conexão.';
     botao.disabled = false;
   });
 });
