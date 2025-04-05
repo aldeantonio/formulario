@@ -27,13 +27,18 @@
       <option value="sistema">Sistema</option>
     </select><br><br>
   
-    <label for="tipo_projeto">Tipo de projeto:</label><br>
-    <select id="tipo_projeto" name="tipo_projeto[]" multiple required>
-      <option value="design">Design</option>
-      <option value="desenvolvimento">Desenvolvimento</option>
-      <option value="manutencao">Manutenção</option>
-      <option value="gestao">Gestão</option>
-    </select><br><br>
+    <label>Tipo de projeto:</label><br>
+    <input type="checkbox" id="design" name="tipo_projeto[]" value="design">
+    <label for="design">Design</label><br>
+  
+    <input type="checkbox" id="desenvolvimento" name="tipo_projeto[]" value="desenvolvimento">
+    <label for="desenvolvimento">Desenvolvimento</label><br>
+  
+    <input type="checkbox" id="manutencao" name="tipo_projeto[]" value="manutencao">
+    <label for="manutencao">Manutenção</label><br>
+  
+    <input type="checkbox" id="gestao" name="tipo_projeto[]" value="gestao">
+    <label for="gestao">Gestão</label><br><br>
   
     <label for="orcamento">Orçamento disponível (MZN):</label><br>
     <input type="number" id="orcamento" name="orcamento" required><br><br>
@@ -49,6 +54,7 @@
   
     <button type="submit">Enviar</button>
   </form>
+  
   
     
 </body>
