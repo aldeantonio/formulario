@@ -1,47 +1,34 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("meu-formulario");
+  const status = document.getElementById("mensagem-estado");
 
-document.getElementById('meu-formulario').addEventListener('submit', function (e) {
-  e.preventDefault();
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  const botao = document.getElementById('botao-enviar');
-  const estado = document.getElementById('mensagem-estado');
-  const form = e.target;
+    const data = new FormData(form);
 
-  botao.disabled = true;
-  estado.textContent = 'A enviar...';
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
-  // Obter todos os dados
-  const dados = {
-    nome: form.nome.value,
-    email: form.email.value,
-    telefone: form.telefone.value,
-    tipo_servico: form.tipo_servico.value,
-    tipo_projeto: Array.from(form.querySelectorAll('input[name="tipo_projeto"]:checked')).map(el => el.value),
-    orcamento: form.orcamento.value,
-    data_entrega: form.data_entrega.value,
-    horario_meeting: form.horario_meeting.value,
-    comentarios: form.comentarios.value
-  };
-
-  // Enviar para o Formspree
-  fetch('https://formspree.io/f/meqwydpr', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(dados)
-  })
-  .then(res => {
-    if (res.ok) {
-      estado.textContent = 'Mensagem enviada com sucesso!';
-      form.reset();
-    } else {
-      estado.textContent = 'Erro ao enviar. Tente novamente.';
+      if (response.ok) {
+        status.innerText = "Obrigado! O formulário foi enviado com sucesso.";
+        form.reset();
+      } else {
+        const resData = await response.json();
+        if (resData.errors) {
+          status.innerText = resData.errors.map(error => error.message).join(", ");
+        } else {
+          status.innerText = "Ocorreu um erro ao enviar. Tente novamente.";
+        }
+      }
+    } catch (error) {
+      status.innerText = "Erro ao conectar. Verifique sua internet ou tente mais tarde.";
     }
-    botao.disabled = false;
-  })
-  .catch(() => {
-    estado.textContent = 'Erro de rede. Verifique a conexão.';
-    botao.disabled = false;
   });
 });
